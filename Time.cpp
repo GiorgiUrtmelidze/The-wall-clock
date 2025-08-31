@@ -13,6 +13,10 @@ const float PI = 3.141592653589793;
 
 Time::Time() = default;
 
+void Time::set_radius(float r) {
+    radius = r;
+}
+
 void Time::draw_clock_numbers(sf::RenderWindow & window) const {
     sf::Font font;
     if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
@@ -22,7 +26,7 @@ void Time::draw_clock_numbers(sf::RenderWindow & window) const {
     sf::Text text;
     text.setFont(font);
     text.setString("X");
-    text.setCharacterSize(100);
+    text.setCharacterSize(radius / 4);
     text.setFillColor(sf::Color::Black);
     text.setStyle(sf::Text::Bold);
     sf::FloatRect textRect = text.getLocalBounds();
@@ -46,7 +50,7 @@ void Time::draw_clock_numbers(sf::RenderWindow & window) const {
 
     string time = format("{:02}:{:02}:{:02}", get_current_hour(), get_current_minute(), get_current_second());
     text.setString(time);
-    text.setCharacterSize(50);
+    text.setCharacterSize(radius / 8);
     text.setPosition(center_x - center_x * 3 / 18.0, center_y + radius * 2 / 5.0);
 
     window.draw(text);
@@ -94,9 +98,8 @@ void Time::draw_little_dot(sf::RenderWindow & window) const {
     window.draw(circle);
 }
 
-void Time::draw_clock_circle(sf::RenderWindow &window) {
-    sf::CircleShape circle(400);
-    radius = 400;
+void Time::draw_clock_circle(sf::RenderWindow &window) const{
+    sf::CircleShape circle(radius);
     circle.setFillColor(sf::Color::Cyan);
     circle.setOutlineColor(sf::Color::Black);
     circle.setOutlineThickness(3);

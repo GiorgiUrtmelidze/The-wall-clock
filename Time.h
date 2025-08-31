@@ -18,6 +18,8 @@ private:
 public:
     Time();
 
+    void set_radius(float radius);
+
     void update_time();
 
     void draw_second_arrow(sf::RenderWindow & window) const;
@@ -28,7 +30,7 @@ public:
 
     void draw_little_dot(sf::RenderWindow & window) const;
 
-    void draw_clock_circle(sf::RenderWindow & window);
+    void draw_clock_circle(sf::RenderWindow & window) const;
 
     void draw_clock_numbers(sf::RenderWindow & window) const;
 
