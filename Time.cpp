@@ -20,7 +20,7 @@ void Time::set_radius(float r) {
 void Time::draw_clock_numbers(sf::RenderWindow & window) const {
     sf::Font font;
     if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
-        cout << "Failed to load font!" << std::endl;
+        cout << "Failed to load font!" << endl;
         return;
     }
     sf::Text text;
