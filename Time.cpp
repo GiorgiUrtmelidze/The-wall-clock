@@ -17,6 +17,56 @@ void Time::set_radius(float r) {
     radius = r;
 }
 
+void Time::draw_clock() {
+    sf ::RenderWindow window(sf::VideoMode(1000, 800), "Clock");
+    const sf::Vector2u size = window.getSize();
+    center_x = size.x / 2.0;
+    center_y = size.y / 2.0;
+    window.clear(sf::Color::White);
+
+    // Infinity loop for clock ticking...
+    loop(window);
+}
+
+void Time::loop(sf::RenderWindow & window) {
+    while (window.isOpen()) {
+        // If pressed exit...
+        sf::Event event{};
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // Update time...
+        update_time();
+
+        // Drawing clock parts...
+        draw_clock_circle(window);
+        draw_clock_numbers(window);
+        draw_second_arrow(window);
+        draw_minute_arrow(window);
+        draw_hour_arrow(window);
+        draw_little_dot(window);
+
+        // Updating screen...
+        window.display();
+
+        sleep(1);
+        window.clear(sf::Color::White);
+    }
+}
+
+void Time::draw_clock_circle(sf::RenderWindow &window) const{
+    sf::CircleShape circle(radius);
+    circle.setFillColor(sf::Color::Cyan);
+    circle.setOutlineColor(sf::Color::Black);
+    circle.setOutlineThickness(3);
+    circle.setOrigin(circle.getRadius(), circle.getRadius());
+    circle.setPosition(center_x, center_y);
+
+    window.draw(circle);
+}
+
 void Time::draw_clock_numbers(sf::RenderWindow & window) const {
     sf::Font font;
     if (!font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")) {
@@ -96,56 +146,6 @@ void Time::draw_little_dot(sf::RenderWindow & window) const {
     circle.setPosition(center_x, center_y);
 
     window.draw(circle);
-}
-
-void Time::draw_clock_circle(sf::RenderWindow &window) const{
-    sf::CircleShape circle(radius);
-    circle.setFillColor(sf::Color::Cyan);
-    circle.setOutlineColor(sf::Color::Black);
-    circle.setOutlineThickness(3);
-    circle.setOrigin(circle.getRadius(), circle.getRadius());
-    circle.setPosition(center_x, center_y);
-
-    window.draw(circle);
-}
-
-void Time::loop(sf::RenderWindow & window) {
-    while (window.isOpen()) {
-        // If pressed exit...
-        sf::Event event{};
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        // Update time...
-        update_time();
-
-        // Drawing clock parts...
-        draw_clock_circle(window);
-        draw_clock_numbers(window);
-        draw_second_arrow(window);
-        draw_minute_arrow(window);
-        draw_hour_arrow(window);
-        draw_little_dot(window);
-
-        // Updating screen...
-        window.display();
-
-        sleep(1);
-        window.clear(sf::Color::White);
-    }
-}
-
-void Time::draw_clock() {
-    sf ::RenderWindow window(sf::VideoMode(1000, 800), "Clock");
-    const sf::Vector2u size = window.getSize();
-    center_x = size.x / 2.0;
-    center_y = size.y / 2.0;
-    window.clear(sf::Color::White);
-
-    // Infinity loop for clock ticking...
-    loop(window);
 }
 
 void Time::update_time() {
