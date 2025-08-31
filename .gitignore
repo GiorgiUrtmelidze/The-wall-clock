@@ -1,0 +1,15 @@
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+my_app
+*.exe
+*.out
+*.app
+
+*.o
+*.obj
+
+.idea/
+*.iml
