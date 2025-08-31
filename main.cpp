@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    Time t {};
+    Time t {}; 
 
     t.set_radius(300);
     t.draw_clock();
