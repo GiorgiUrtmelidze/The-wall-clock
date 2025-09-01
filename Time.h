@@ -15,11 +15,6 @@ private:
     float center_x{};
     float center_y{};
 
-public:
-    Time();
-
-    void set_radius(float radius);
-
     void update_time();
 
     void draw_second_arrow(sf::RenderWindow & window) const;
@@ -36,8 +31,6 @@ public:
 
     void loop(sf::RenderWindow & window);
 
-    void draw_clock();
-
     short get_current_hour() const;
 
     short get_current_minute() const;
@@ -49,6 +42,13 @@ public:
     float get_minute_arrow_direction() const;
 
     float get_second_arrow_direction() const;
+
+public:
+    Time();
+
+    void set_radius(float radius);
+    
+    void draw_clock();
 };
 
 #endif //TIME_H
